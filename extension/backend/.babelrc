@@ -1,0 +1,13 @@
+{
+  "presets": [
+    "env",
+    "react"
+  ],
+  "plugins": [
+    "babel-plugin-inline-import",
+    "add-module-exports",
+    "transform-object-rest-spread",
+    "transform-class-properties",
+    "transform-runtime"
+  ]
+}

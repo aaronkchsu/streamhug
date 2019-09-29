@@ -1,0 +1,1 @@
+web: nodemon ./services/backend.js --exec babel-node -e graphql,js,json,env

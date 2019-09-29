@@ -1,0 +1,245 @@
+{
+  "allowHttpBackend": false,
+  "backendCommand": "node src/index -c \"oafn7vvzfyzyccwrwrt233221oe5wq\" -s \"aqox8pb4+yJV0ZJyjBVxsvYyyB0irxZiA0sgS01yzD0=\" -o \"253326823\" -l",
+  "backendFolderName": "backend",
+  "extensionViews": [
+    {
+      "id": "2",
+      "label": "",
+      "channelId": "253326823",
+      "configurationAnchor": "panel",
+      "displayChannelName": "blerp",
+      "type": "config",
+      "features": {
+        "isBitsEnabled": true,
+        "isChatEnabled": true,
+        "isSubscriptionStatusAvailable": true
+      },
+      "linked": true,
+      "linkedUserId": "265737932",
+      "mode": "config",
+      "isPopout": false,
+      "role": "Broadcaster",
+      "x": 0,
+      "y": 0,
+      "orientation": "Portrait",
+      "frameSize": {
+        "width": 1280,
+        "height": 720
+      }
+    },
+    {
+      "id": "3",
+      "label": "",
+      "channelId": "253326823",
+      "configurationAnchor": "panel",
+      "displayChannelName": "blerp",
+      "type": "panel",
+      "features": {
+        "isBitsEnabled": true,
+        "isChatEnabled": true,
+        "isSubscriptionStatusAvailable": true
+      },
+      "linked": true,
+      "linkedUserId": "265737932",
+      "mode": "viewer",
+      "isPopout": false,
+      "role": "Logged-In Viewer",
+      "x": 0,
+      "y": 0,
+      "orientation": "Portrait",
+      "frameSize": {
+        "width": 1280,
+        "height": 720
+      }
+    },
+    {
+      "id": "5",
+      "label": "",
+      "channelId": "253326823",
+      "configurationAnchor": "panel",
+      "displayChannelName": "blerp",
+      "type": "mobile",
+      "features": {
+        "isBitsEnabled": true,
+        "isChatEnabled": false,
+        "isSubscriptionStatusAvailable": false
+      },
+      "linked": false,
+      "linkedUserId": "",
+      "mode": "viewer",
+      "isPopout": false,
+      "role": "Broadcaster",
+      "x": 0,
+      "y": 0,
+      "orientation": "Portrait",
+      "frameSize": {
+        "width": 375,
+        "height": 667
+      }
+    },
+    {
+      "id": "6",
+      "label": "iPhone Users",
+      "channelId": "253326823",
+      "configurationAnchor": "panel",
+      "displayChannelName": "blerp",
+      "type": "mobile",
+      "features": {
+        "isBitsEnabled": true,
+        "isChatEnabled": true,
+        "isSubscriptionStatusAvailable": true
+      },
+      "linked": false,
+      "linkedUserId": "",
+      "mode": "viewer",
+      "isPopout": false,
+      "role": "Logged-In Viewer",
+      "x": 0,
+      "y": 0,
+      "orientation": "Portrait",
+      "frameSize": {
+        "width": 375,
+        "height": 667
+      }
+    },
+    {
+      "id": "7",
+      "label": "Logged In Mobile",
+      "channelId": "253326823",
+      "configurationAnchor": "panel",
+      "displayChannelName": "blerp",
+      "type": "mobile",
+      "features": {
+        "isBitsEnabled": true,
+        "isChatEnabled": true,
+        "isSubscriptionStatusAvailable": true
+      },
+      "linked": true,
+      "linkedUserId": "265737932",
+      "mode": "viewer",
+      "isPopout": false,
+      "role": "Logged-In Viewer",
+      "x": 0,
+      "y": 0,
+      "orientation": "Portrait",
+      "frameSize": {
+        "width": 375,
+        "height": 667
+      }
+    },
+    {
+      "id": "8",
+      "label": "mobile iphone",
+      "channelId": "253326823",
+      "configurationAnchor": "panel",
+      "displayChannelName": "developer rig",
+      "type": "mobile",
+      "features": {
+        "isBitsEnabled": true,
+        "isChatEnabled": true,
+        "isSubscriptionStatusAvailable": true
+      },
+      "linked": false,
+      "linkedUserId": "",
+      "mode": "viewer",
+      "isPopout": false,
+      "role": "Broadcaster",
+      "x": 0,
+      "y": 0,
+      "orientation": "Portrait",
+      "frameSize": {
+        "width": 375,
+        "height": 822
+      }
+    }
+  ],
+  "manifest": {
+    "anchor": "panel",
+    "assetUrls": [],
+    "authorName": "Blerp Inc.",
+    "bitsEnabled": true,
+    "canInstall": true,
+    "configUrl": "https://localhost.rig.twitch.tv:8080/config.html",
+    "configurationLocation": "none",
+    "description": "Enable viewers to play sounds to your stream using content from https://blerp.com. Blerp is the largest database of soundboards, sound effects, and audio clips. \n\nYou can personalize and only show specific sounds for your channel!\n\nExtension can optionally use bits. Enable your subscribers to send multiple sounds! \n\nIf chats enabled extension will post when...\n* Sound clips are shared\n\nINSTRUCTIONS - https://blerp.com/twitch-setup\n* Install Extension, Activate Extension\n* Copy source URL into a browser or streaming software\n\nBy default, Blerp search mode is limited to a G/PG rating, meaning content with violence, sexual references, and lewd terms are all prohibited amongst other things. In addition, blerp's content is moderated to remove content that is overtly offensive to any race, gender, ethnicity, or community. Only blerps approved by our moderation team will show up for twitch.\n\nQuestions about getting your content into Blerp Twitch or finding help? Reach out to support@blerp.com or join our Discord!",
+    "eulaTosUrl": "https://blerp.com/terms",
+    "hasChatSupport": true,
+    "iconUrl": "",
+    "iconUrls": {},
+    "id": "oafn7vvzfyzyccwrwrt233221oe5wq",
+    "installationCount": -42,
+    "liveConfigUrl": "https://localhost.rig.twitch.tv:8080/live_config.html",
+    "name": "Blerp. Sounds, Soundboards & Alerts",
+    "panelHeight": 496,
+    "privacyPolicyUrl": "https://blerp.com/privacy",
+    "requestIdentityLink": true,
+    "requiredBroadcasterAbilities": [],
+    "screenshotUrls": [],
+    "sku": "",
+    "state": "Testing",
+    "subscriptionsSupportLevel": "optional",
+    "summary": "Use Blerp custom soundboards to empower your viewers to stream audio clips, sounds, and soundbites!",
+    "supportEmail": "twitch@blerp.com",
+    "vendorCode": "",
+    "version": "0.1.12",
+    "viewerSummary": "Use Blerp soundboards to empower your viewers to play audio clips, sounds, and soundbites to everyone or themselves!",
+    "viewerUrl": "https://localhost.rig.twitch.tv:8080/panel.html",
+    "viewerUrls": {
+      "mobile": "https://localhost.rig.twitch.tv:8080/panel.html",
+      "panel": "https://localhost.rig.twitch.tv:8080/panel.html",
+      "component": "https://localhost.rig.twitch.tv:8080/video_component.html"
+    },
+    "views": {
+      "mobile": {
+        "viewerUrl": "https://localhost.rig.twitch.tv:8080/panel.html"
+      },
+      "panel": {
+        "viewerUrl": "https://localhost.rig.twitch.tv:8080/panel.html",
+        "height": 496,
+        "canLinkExternalContent": true
+      },
+      "component": {
+        "viewerUrl": "https://localhost.rig.twitch.tv:8080/video_component.html",
+        "aspectWidth": 2500,
+        "aspectHeight": 6500,
+        "aspectRatioX": 40000,
+        "aspectRatioY": 58500,
+        "autoscale": true,
+        "scalePixels": 320,
+        "targetHeight": 8666,
+        "size": 0,
+        "zoom": true,
+        "zoomPixels": 320,
+        "canLinkExternalContent": false
+      },
+      "config": {
+        "viewerUrl": "https://localhost.rig.twitch.tv:8080/config.html",
+        "canLinkExternalContent": true
+      },
+      "liveConfig": {
+        "viewerUrl": "https://localhost.rig.twitch.tv:8080/live_config.html",
+        "canLinkExternalContent": true
+      }
+    },
+    "whitelistedConfigUrls": [
+      "blerp.com",
+      "twitch.blerp.com",
+      "party.blerp.com",
+      "api.blerp.com",
+      "ebs.blerp.com"
+    ],
+    "whitelistedPanelUrls": [
+      "blerp.com",
+      "twitch.blerp.com",
+      "party.blerp.com",
+      "api.blerp.com",
+      "ebs.blerp.com"
+    ]
+  },
+  "frontendCommand": "npm run host",
+  "frontendFolderName": "frontend",
+  "name": "Blerp",
+  "certificateExceptions": [],
+  "version": 1
+}

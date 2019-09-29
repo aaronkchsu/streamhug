@@ -1,0 +1,320 @@
+<!doctype html>
+<html>
+  <head>
+    <style>
+      @font-face {
+        font-family: "Odudo";
+        font-weight: normal;
+        src: url('https://storage.googleapis.com/blerp-web-images/fonts/web/Odudo-Regular.eot');
+        src: url('https://storage.googleapis.com/blerp-web-images/fonts/web/Odudo-Regular.woff2') format("woff2"),
+              url('https://storage.googleapis.com/blerp-web-images/fonts/web/Odudo-Regular.woff') format("woff");
+      }
+
+      @font-face {
+        font-family: "Odudo";
+        font-weight: 600;
+        src: url('https://storage.googleapis.com/blerp-web-images/fonts/web/Odudo-SemiBold.eot');
+        src: url('https://storage.googleapis.com/blerp-web-images/fonts/web/Odudo-SemiBold.woff2') format("woff2"),
+              url('https://storage.googleapis.com/blerp-web-images/fonts/web/Odudo-SemiBold.woff') format("woff");
+      }
+
+      @font-face {
+        font-family: "Odudo";
+        font-weight: lighter;
+        src: url('https://storage.googleapis.com/blerp-web-images/fonts/web/Odudo-Light.eot');
+        src: url('https://storage.googleapis.com/blerp-web-images/fonts/web/Odudo-Light.woff2') format("woff2"),
+              url('https://storage.googleapis.com/blerp-web-images/fonts/web/Odudo-Light.woff') format("woff");
+      }
+
+      #blerp-flubber {
+        opacity: 1;
+        transition: all .2s ease-in-out;
+      }
+
+      #blerp-flubber.fade {
+        opacity: 0;
+      }
+
+      #blerp-flubber2 {
+        opacity: 0;
+        transition: all .2s ease-in-out;
+      }
+
+      #blerp-donation-text {
+        transition: all .2s ease-in-out;
+      }
+
+      #blerp-flubber2.fade {
+        opacity: 1;
+      }
+
+      #blerp-donation-text.fade {
+        opacity: 1;
+      }
+    </style>
+    <title>Blerp Broadcast Panel</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      $(function () {
+        function Queue() {
+          this.data = [];
+        }
+
+        Queue.prototype.add = function(record) {
+          this.data.unshift(record);
+        }
+
+        Queue.prototype.remove = function() {
+          return this.data.pop();
+        }
+
+        Queue.prototype.first = function() {
+          return this.data[0];
+        }
+        Queue.prototype.last = function() {
+          return this.data[this.data.length - 1];
+        }
+        Queue.prototype.size = function() {
+          return this.data.length;
+        }
+
+        let audioQueue = new Queue();
+        let currentlyPlayingSounds = false;
+        const DEFAULT_BITE_IMAGE = "https://storage.googleapis.com/blerp_products/Twitch/Assets/Overlay%20notification%20Icons/Ibis%20_Blerp%20Icon_overlay.svg"
+        
+        function playAudioObjectBlast({volume, audioUrl, donatorName, biteTitle, numberOfBits, timeOut, onEnded}) {
+          setTimeout(() => {
+            try {
+              let audioPlayer = new Audio(audioUrl);
+              audioPlayer.volume = volume
+              const playPromise = audioPlayer.play();
+              if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                  // Automatic playback started!
+                  // Show playing UI.
+                })
+                .catch(error => {
+                  // Auto-play was prevented
+                  // Show paused UI.
+                  onEnded()
+                  console.log("playing failed witihin", error)
+                });
+              }
+              audioPlayer.onended = onEnded
+            } catch(err) {
+              onEnded()
+              console.log("playing failed", err)
+            }
+          }, timeOut) // The seconds could change depending on how close we wnat the sounds to play
+        }
+
+        let url = $(location).attr('href'),
+        parts = url.split("/"),
+        last_part = parts[parts.length-1];
+
+        let socket = io({
+          query: {
+            roomId: last_part
+          }
+        });
+
+        socket.on('play audio', function(msg) {
+          let currentStreamer = msg.currentStreamer
+          let otherStreamer = msg.otherStreamer
+          
+          try {
+            let audioPlayer = new Audio("https://audio.blerp.com/audio/d568c5e0-8d34-11e9-9016-8b78caf46556?type=MP3");
+            audioPlayer.volume = volume
+            const playPromise = audioPlayer.play();
+            if (playPromise !== undefined) {
+              playPromise.then(_ => {
+                // Automatic playback started!
+                // Show playing UI.
+              })
+              .catch(error => {
+                // Auto-play was prevented
+                // Show paused UI.
+                onEnded()
+                console.log("playing failed witihin", error)
+              });
+            }
+            audioPlayer.onended = onEnded
+          } catch(err) {
+            onEnded()
+            console.log("playing failed", err)
+          }
+
+          var blerpFlubber = document.getElementById('blerp-flubber');
+          blerpFlubber.classList.toggle('fade');
+
+          var blerpFlubber2 = document.getElementById('blerp-flubber2');
+          blerpFlubber2.classList.toggle('fade');
+
+          document.getElementById("blerp-donation-text").innerHTML = `${biteTitle}`
+          document.getElementById("blerp-donation-user").innerHTML = `${donatorName}`
+
+          var slideSource = document.getElementById('blerp-donation-text');
+          slideSource.classList.toggle('fade');
+
+          setTimeout(() => {
+            if(imageUrl && imageUrl !== "https://image.blerp.com/image/default2-a89e-4a33-8a26-4fff77cd9607?h=100&w=100&type=ORIGINAL") {
+              setTimeout(() => {
+                $('#alert_bite_image').attr('src', DEFAULT_BITE_IMAGE);
+                document.getElementById('alert_bite_image').style.borderRadius = "0px"
+              }, 200)
+            }
+            slideSource.classList.toggle('fade');
+            blerpFlubber.classList.toggle('fade');
+            blerpFlubber2.classList.toggle('fade');
+          }, 6000)
+
+        });
+
+        socket.on('play blast', function(msg) {
+          const blastBites = JSON.parse(msg.blastBites)
+          const volume = msg.volume
+          const donatorName = msg.userName
+          const numberOfBits = msg.bitCost
+
+          for (let i = 0; i < blastBites.length; i++) {
+            let bite = blastBites[i]
+            audioQueue.add({
+              audioUrl: bite.audioUrl ? bite.audioUrl : bite.audio.mp3.url,
+              volume: volume,
+              imageUrl: bite.imageUrl,
+              donatorName: donatorName,
+              numberOfBits: numberOfBits,
+              biteTitle: bite.title ? bite.title.substring(0,70) : ""
+            })
+          }
+
+          let currentAudioObject1 = audioQueue.remove()
+          let currentAudioObject2 = audioQueue.remove()
+          let currentAudioObject3 = audioQueue.remove()
+          let currentAudioObject4 = audioQueue.remove()
+          let currentAudioObject5 = audioQueue.remove()
+
+          let blerpFlubber = document.getElementById('blerp-flubber');
+          blerpFlubber.classList.toggle('fade');
+
+          let blerpFlubber2 = document.getElementById('blerp-flubber2');
+          blerpFlubber2.classList.toggle('fade');
+
+          document.getElementById("blerp-donation-text").innerHTML = `Blasting Blerps!`
+          document.getElementById("blerp-donation-user").innerHTML = `${donatorName}`
+
+          let slideSource = document.getElementById('blerp-donation-text');
+          slideSource.classList.toggle('fade');
+
+          const whenToPlay = currentlyPlayingSounds ? 4500 : 0;
+          currentlyPlayingSounds = true
+
+            // TODO: find a cleaner way to do this one day?
+
+            if(currentAudioObject1.imageUrl && currentAudioObject1.imageUrl !== "https://image.blerp.com/image/default2-a89e-4a33-8a26-4fff77cd9607?h=100&w=100&type=ORIGINAL") {
+              $('#alert_bite_image').attr('src', currentAudioObject1.imageUrl);
+              document.getElementById('alert_bite_image').style.borderRadius = "1000px"
+            }
+            playAudioObjectBlast({volume: currentAudioObject1.volume, audioUrl: currentAudioObject1.audioUrl, donatorName: currentAudioObject1.donatorName, biteTitle: currentAudioObject1.biteTitle, numberOfBits: currentAudioObject1.numberOfBits, timeOut: whenToPlay, onEnded: () => {
+            if(!currentAudioObject2) {
+              slideSource.classList.toggle('fade');
+              blerpFlubber.classList.toggle('fade');
+              blerpFlubber2.classList.toggle('fade');
+              currentlyPlayingSounds = false
+              if (currentAudioObject1.imageUrl) {
+                $('#alert_bite_image').attr('src', DEFAULT_BITE_IMAGE);
+                document.getElementById('alert_bite_image').style.borderRadius = "0px"
+              }     
+              return;
+            }
+            playAudioObjectBlast({volume: currentAudioObject2.volume, audioUrl: currentAudioObject2.audioUrl, donatorName: currentAudioObject2.donatorName, biteTitle: currentAudioObject2.biteTitle, numberOfBits: currentAudioObject2.numberOfBits, timeOut: 50, onEnded: () => {
+              if(!currentAudioObject3) {
+                slideSource.classList.toggle('fade');
+                blerpFlubber.classList.toggle('fade');
+                blerpFlubber2.classList.toggle('fade');
+                currentlyPlayingSounds = false
+                if (currentAudioObject1.imageUrl) {
+                  setTimeout(() => {
+                    $('#alert_bite_image').attr('src', DEFAULT_BITE_IMAGE);
+                    document.getElementById('alert_bite_image').style.borderRadius = "0px"
+                  }, 200)
+                }      
+                return;
+              }
+              playAudioObjectBlast({volume: currentAudioObject3.volume, audioUrl: currentAudioObject3.audioUrl, donatorName: currentAudioObject3.donatorName, biteTitle: currentAudioObject3.biteTitle, numberOfBits: currentAudioObject3.numberOfBits, timeOut: 50, onEnded: () => {
+                if(!currentAudioObject4) {
+                  slideSource.classList.toggle('fade');
+                  blerpFlubber.classList.toggle('fade');
+                  blerpFlubber2.classList.toggle('fade');
+                  currentlyPlayingSounds = false
+                  if (currentAudioObject1.imageUrl) {
+                    setTimeout(() => {
+                      $('#alert_bite_image').attr('src', DEFAULT_BITE_IMAGE);
+                      document.getElementById('alert_bite_image').style.borderRadius = "0px"
+                    }, 200)
+                  }
+                  return;
+                }
+                playAudioObjectBlast({volume: currentAudioObject4.volume, audioUrl: currentAudioObject4.audioUrl, donatorName: currentAudioObject4.donatorName, biteTitle: currentAudioObject4.biteTitle, numberOfBits: currentAudioObject4.numberOfBits, timeOut: 50, onEnded: () => {
+                  if(!currentAudioObject5) {
+                    slideSource.classList.toggle('fade');
+                    blerpFlubber.classList.toggle('fade');
+                    blerpFlubber2.classList.toggle('fade');
+                    currentlyPlayingSounds = false
+                    if (currentAudioObject1.imageUrl) {
+                      setTimeout(() => {
+                        $('#alert_bite_image').attr('src', DEFAULT_BITE_IMAGE);
+                        document.getElementById('alert_bite_image').style.borderRadius = "0px"
+                      }, 200)
+                    }
+                    return;
+                  }
+                  playAudioObjectBlast({volume: currentAudioObject5.volume, audioUrl: currentAudioObject5.audioUrl, donatorName: currentAudioObject5.donatorName, biteTitle: currentAudioObject5.biteTitle, numberOfBits: currentAudioObject5.numberOfBits,  timeOut: 50, onEnded: () => {
+                    slideSource.classList.toggle('fade');
+                    blerpFlubber.classList.toggle('fade');
+                    blerpFlubber2.classList.toggle('fade');
+                    currentlyPlayingSounds = false
+                    // console.log("BLERP BLAST FINISHED")
+                    if (currentAudioObject1.imageUrl) {
+                      setTimeout(() => {
+                        $('#alert_bite_image').attr('src', DEFAULT_BITE_IMAGE);
+                        document.getElementById('alert_bite_image').style.borderRadius = "0px"
+                      }, 200)
+                    }
+                  }})
+                }})
+              }})
+            }})
+          }})
+        });
+      });
+    </script>
+  </head>
+
+<body style="position: relative;">
+  <div style="position: absolute; top: 0; display: flex; width: 100%; height: 100vh; margin: 0; align-items: center; justify-content: center; opacity: 1; flex-direction: column;">
+    <div id="blerp-flubber2" style="display:flex; flex-direction:row; width: 90%; align-items:center; justify-content: center; position: relative;">        
+        <img id="alert_bite_image" style="margin: -15%; overflow: hidden; z-index: 1; width: 23%; align-self: center;" src="https://storage.googleapis.com/blerp_products/Twitch/Assets/Overlay%20notification%20Icons/Ibis%20_Blerp%20Icon_overlay.svg">
+        <img style="right: 0; position: absolute; width: 100%; align-self: center;" src="https://storage.googleapis.com/blerp_products/Twitch/Assets/Overlay%20notification%20Icons/White%20_Background%20Blerp%20overlay.svg">
+        
+        <img style="bottom: 5%; right: -4%; position: absolute; z-index: 1; width: 24%;" src="https://storage.googleapis.com/blerp_products/Twitch/Assets/Overlay%20notification%20Icons/Ibis%20_circle%20sound%20icon.svg">
+        <img style="right: -10%; position: absolute; z-index: 1; width: 16%;" src="https://storage.googleapis.com/blerp_products/Twitch/Assets/Overlay%20notification%20Icons/Purple%20_circle%20sound%20icon.svg">
+        <img style="top: 60%; right: 0; position: absolute; z-index: 1; width: 10%;" src="https://storage.googleapis.com/blerp_products/Twitch/Assets/Overlay%20notification%20Icons/Teal%20_circle%20sound%20icon.svg">
+
+        <div style="display:flex; flex-direction: row; width: 80%; align-items: center; justify-content: center; position: relative;">
+
+          <div style="width: 100%; left: 28%; display:flex; flex-direction: column; align-items: flex-start; justify-content: center; position: relative;">
+            <p id="blerp-donation-text" style="width: 65%; margin: 4px 0; font-size: 4vw; text-align: left; color: #21000C; font-weight: 700; font-family: Odudo; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">This is a test words for us to check if its working</p>
+            <p id="blerp-donation-user" style="width: 65%; margin: 4px 0; font-size: 6vw; text-align: left; color: #47463F; font-weight: lighter; font-family: Odudo; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">Example User Name long</p>
+          </div>
+
+      </div>
+
+      </div>
+  </div>
+  <div style="display: flex; width: 100%; height: 100vh; margin: 0; align-items: center; justify-content: center; opacity: 0.0;">
+    <img id="blerp-flubber" style="width: 20%" src="https://storage.googleapis.com/blerp-public-images/twitch/single-square-blerpy.png">
+  </div>
+</body>
+

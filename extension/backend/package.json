@@ -1,0 +1,52 @@
+{
+  "name": "blerp-backend-twitch-extension",
+  "version": "0.0.1",
+  "description": "Blerp Twitch Extension Backend",
+  "main": "index.js",
+  "scripts": {
+    "cert": "node bin/generate_cert.js server",
+    "start": "node src/index",
+    "clean": "pm2 delete twitch-back",
+    "prod": "pm2 start ./src/index.js --name='twitch-back' --node-args='--max_old_space_size=2048'",
+    "start:online": "node src/index -c <client id> -s <secret> -o <owner id>"
+  },
+  "keywords": [
+    "twitch",
+    "extension"
+  ],
+  "author": "Aaron Kc Hsu <aaron@blerp.com>",
+  "license": "Blerp Inc. Copyright",
+  "dependencies": {
+    "apollo-cache-inmemory": "^1.5.1",
+    "apollo-client": "^2.5.1",
+    "apollo-link": "^1.2.11",
+    "apollo-link-error": "^1.1.10",
+    "apollo-link-http": "^1.5.14",
+    "better-queue": "^3.8.10",
+    "boom": "^7.2.0",
+    "color": "^3.0.0",
+    "commander": "^2.15.0",
+    "dotenv": "^8.0.0",
+    "findorcreate-promise": "1.2.0",
+    "gql": "^1.1.2",
+    "graphql": "^14.2.1",
+    "graphql-tag": "^2.10.1",
+    "hapi": "^17.2.2",
+    "inert": "^5.1.2",
+    "isomorphic-fetch": "^2.2.1",
+    "jsonwebtoken": "^8.2.0",
+    "log4js": "^3.0.5",
+    "mongodb": "^3.2.3",
+    "mongoose": "5.2.14",
+    "mongoose-long": "0.2.1",
+    "mongoose-paginate": "5.0.3",
+    "mongoose-type-email": "1.0.5",
+    "mongoose-type-url": "1.0.2",
+    "mongoose-unique-validator": "2.0.1",
+    "request": "^2.88.0",
+    "request-promise-native": "1.0.7",
+    "selfsigned": "^1.10.2",
+    "socket.io": "^2.2.0"
+  },
+  "devDependencies": {}
+}

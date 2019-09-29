@@ -1,0 +1,48 @@
+[
+    {
+        "twitchObject": {
+            "url": "https://www.twitch.tv/developerrig",
+            "id": "265737932"
+        },
+        "roomId": "5c52fd07ec79d707be42d18a",
+        "mpaaRating": "R",
+        "channelCooldown": 0,
+        "globalBitCost": 0,
+        "blastPrice": 10000,
+        "isChatEnabled": true,
+        "isAcceptingSounds": true,
+        "volume": 0.52,
+        "specificBoardEnabled": false,
+        "selectedBoardIds": [
+            "5b237ffbfca7167a3562812b",
+            "5b237ffbfca7167a35628129",
+            "5b237ffbfca7167a35628131"
+        ],
+        "_id": "5c34567d153a714785bdf20c",
+        "channelId": "265737932",
+        "createdAt": "2019-01-08T07:51:25.213Z",
+        "updatedAt": "2019-02-17T03:58:54.488Z",
+        "__v": 0
+    },
+    {
+        "twitchObject": {
+            "url": "https://www.twitch.tv/someblondi",
+            "id": "203233216"
+        },
+        "roomId": "5c417b2315e1282375a61a63",
+        "mpaaRating": "G",
+        "channelCooldown": 30,
+        "globalBitCost": 1000,
+        "blastPrice": 100,
+        "isChatEnabled": true,
+        "isAcceptingSounds": true,
+        "volume": 0.61,
+        "specificBoardEnabled": false,
+        "selectedBoardIds": [],
+        "_id": "5c417b2315e1282375a61a64",
+        "channelId": "203233216",
+        "createdAt": "2019-01-18T07:07:15.930Z",
+        "updatedAt": "2019-01-18T07:15:52.227Z",
+        "__v": 0
+    }
+]
