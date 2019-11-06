@@ -37,7 +37,7 @@
     "jsonwebtoken": "^8.2.0",
     "log4js": "^3.0.5",
     "mongodb": "^3.2.3",
-    "mongoose": "5.2.14",
+    "mongoose": "5.7.5",
     "mongoose-long": "0.2.1",
     "mongoose-paginate": "5.0.3",
     "mongoose-type-email": "1.0.5",
